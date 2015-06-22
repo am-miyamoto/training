@@ -1,30 +1,64 @@
 'use strict';
 
-window.onload = function() {
-  var username = document.getElementsByName('username')[0];
-  var password = document.getElementsByName('password')[0];
-  var login = document.getElementById('btn_login');
-  var message = document.getElementById('message');
+/**
+ * params.username と Password を受け取り
+ * 正しいフォーマットかチェックする。
+ *
+ * 正しい場合：空の配列
+ * 正しくない場合：メッセージを入れた配列を返す
+ */
+function validation(params) {
+  var errors = [];
+  if (!params.username) {
+    errors.push('usernameを入力して下さい');
+  } else {
+    if (params.username.length < 2 || params.username.length > 8) {
+      errors.push('usernameは2から8文字です');
+    }
+    if (params.username.match(/[^(a-z\-)]/)) {
+      errors.push('usernameに使える文字は英小文字と-(ハイフン)です');
+    }
+  }
 
-  login.addEventListener('click', function(e) {
-    try {
-      if(username.value.length < 2 || username.value.length > 8)
-        throw 'usernameは2～8文字です';
+  if (!params.password) {
+    errors.push('Passwordを入力して下さい');
+  } else {
+    if (params.password.length < 6 || params.password.length > 24) {
+      errors.push('Passwordは6から24文字です');
+    }
+    if (params.password.match(/[^(a-zA-z\-\+!@)]/)) {
+      errors.push('Passwordに使える文字は英小大文字と-,+,!,@です');
+    }
+  }
+  return errors;
+}
 
-      if(username.value.match(/[^(a-z|\-)]/))
-        throw 'usernameに使える文字は英小文字と-(ハイフン)です';
+window.addEventListener('load', function() {
+  var $login = document.getElementById('loginForm');
+  var $errors = document.getElementById('errors');
 
-      if(password.value.length < 6 || password.value.length > 24)
-        throw 'passwordは6～24文字です';
+  $login.addEventListener('submit', function(e) {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    var params = {
+      username: username,
+      password: password
+    };
 
-      if(password.value.match(/[^(a-zA-z|\-|\+|\!|\@)]/))
-        throw 'passwordに使える文字は英小大文字と-,+,!,@です';
+    while($errors.firstChild) {
+      $errors.removeChild($errors.firstChild);
+    }
 
-　　　message.value = '';
-
-    } catch(err) {
-      message.value = err;
+    var error_messages = validation(params);
+    if(error_messages.length > 0) {
       e.preventDefault();
+      for(var i = 0; i < error_messages.length; i++) {
+        var $li = document.createElement('li');
+        var $strong = document.createElement('strong');
+        $strong.textContent = error_messages[i];
+        $li.appendChild($strong);
+        $errors.appendChild($li);
+      }
     }
   });
-};
+});
