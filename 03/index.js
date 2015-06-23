@@ -1,6 +1,7 @@
 // require
 var express = require('express');
 var bodyParser = require('body-parser');
+var users = require('./src/model/users')
 var app = express();
 
 // setting
@@ -66,9 +67,9 @@ app.get('/', function(req, res) {
   res.redirect('/public/index.html');
 })
 
-var users = {
-  soneda: 'abcdefg'
-};
+// var users = {
+//   soneda: 'abcdefg'
+// };
 
 app.get('/test', function(req, res){
   var username = req.query.username;
@@ -83,11 +84,18 @@ app.post('/test', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
 
-  if(users[username] && password === users[username]) {
-    res.send('ok');
-  } else {
-    res.send('ng');
-  }
+  users.login(username, password, function(err, result) {
+    console.log(err, result);
+    if (err) {
+      return res.send('ng');
+    }
+
+    if (result === true) {
+      return res.send('ok');
+    } else {
+      return res.send('ng');
+    }
+  });
 });
 
 // console.log(req.body);
