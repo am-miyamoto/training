@@ -58,7 +58,36 @@ app.post('/submit', function(req, res) {
 // GET /ejs
 app.get('/ejs', function(req, res) {
    var id = req.query.id;
-  res.render('index', {id: id});
+  res.redirect('/hello');
+  // res.render('index', {id: id});
+});
+
+var users = {
+  soneda: 'abcdefg'
+};
+
+app.get('/test', function(req, res){
+  console.log(req.query);
+  var username = req.query.username;
+  console.log(username);
+  console.log(users.soneda);
+  console.log(users[username]);
+  if(users[username] && req.query.password === users[username]) {
+    res.send('ok');
+  } else {
+    res.status(401).send('ng');
+  }
+});
+
+app.post('/test', function(req, res){
+  var username = req.body.username;
+  var password = req.body.password;
+
+  if(users[username] && password === users[username]) {
+    res.send('ok');
+  } else {
+    res.send('ng');
+  }
 });
 
 // console.log(req.body);
