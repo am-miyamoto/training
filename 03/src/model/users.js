@@ -14,7 +14,7 @@ module.exports.login = function login(username, password, callback) {
     }
 
     if (users[username] === password) {
-      return callback(null,true);
+      return callback(null, true);
     }
     return callback(null, false);
   });
