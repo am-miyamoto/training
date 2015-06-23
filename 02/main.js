@@ -1,31 +1,27 @@
 
 window.addEventListener('load', function() {
   var $login = document.getElementById('loginForm');
+  var $errors = document.getElementById('errors');
 
   $login.addEventListener('submit', function(e) {
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
+    var params = {
+      username: username,
+      password: password
+    };
 
-    console.log(username, password);
+    while($errors.firstChild) {
+      $errors.removeChild($errors.firstChild);
+    }
 
-    if (username === '' || password === '') {
+    var error_messages = validation(params);
+    if(error_messages.length > 0) {
       e.preventDefault();
-      var $errors = document.getElementById('errors');
-
-      $errors.removeChild();
-
-      if (!username) {
+      for(var i = 0; i < error_messages.length; i++) {
         var $li = document.createElement('li');
         var $strong = document.createElement('strong');
-        $strong.textContent = "username is empty"
-        $li.appendChild($strong);
-        $errors.appendChild($li);
-      }
-
-      if (!password){
-        var $li = document.createElement('li');
-        var $strong = document.createElement('strong');
-        $strong.textContent = "password is empty"
+        $strong.textContent = error_messages[i];
         $li.appendChild($strong);
         $errors.appendChild($li);
       }
