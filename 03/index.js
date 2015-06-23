@@ -1,9 +1,16 @@
 // require
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 // middle ware
 app.use('/public', express.static('public'));
+
+// Content-type
+// application/x-www-form-urlencoded -> username=soneda&item=10
+// application/json
+// multipart/form-data (file upload)
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // routing
 // GET http://localhost:3000/hello -> world
@@ -28,6 +35,21 @@ app.get('/users/:id', function(req, res) {
 app.get('/sendfile', function(req, res) {
   res.sendFile('sample.html');
 });
+
+// GET
+app.get('/submit', function(req, res) {
+  console.log(req.body);
+  console.log(req.params);
+  console.log(req.path);
+  console.log(req.query);
+  res.send(req.query.username);
+});
+
+// POST
+app.post('/submit', function(req, res) {
+  res.send(req.body);
+});
+
 // console.log(req.body);
 // console.log(req.params);
 // console.log(req.path);

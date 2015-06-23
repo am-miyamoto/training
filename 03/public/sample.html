@@ -2,5 +2,14 @@
 <title>sample</title>
 <script src="js/sample.js"></script>
 <link rel="stylesheet" href="css/sample.css"></link>
-<!-- http://localhost:3000のあとに /public/sample.html
+<!-- http://localhost:3000のあとに /public/sample.html-->
 <h1>sample</h1>
+<a href="/submit?username=hoge">hoge</a>
+
+<form method="post" action="/submit" >
+  <label for="username">password:</label>
+  <input type="text" name="username"/></br>
+  <label for="password">password:</label>
+  <input id="password" type="password" name="password"/>
+  <input type="submit" />
+</form>
