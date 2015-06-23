@@ -3,6 +3,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
+// setting
+// http://expressjs.com/guide/using-template-engines.html
+app.set('views', './views');
+app.set('view engine', 'ejs');
+
 // middle ware
 app.use('/public', express.static('public'));
 
@@ -50,10 +55,18 @@ app.post('/submit', function(req, res) {
   res.send(req.body);
 });
 
+// GET /ejs
+app.get('/ejs', function(req, res) {
+   var id = req.query.id;
+  res.render('index', {id: id});
+});
+
 // console.log(req.body);
 // console.log(req.params);
 // console.log(req.path);
 // console.log(req.query);
+
+
 
 // server start
 console.log('listen at 3000');
