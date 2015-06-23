@@ -38,7 +38,7 @@ app.get('/users/:id', function(req, res) {
 
 // GET
 app.get('/sendfile', function(req, res) {
-  res.sendFile('sample.html');
+  res.sendFile(__dirname + '/public/sample.html');
 });
 
 // GET
@@ -61,6 +61,10 @@ app.get('/ejs', function(req, res) {
   res.redirect('/hello');
   // res.render('index', {id: id});
 });
+
+app.get('/', function(req, res) {
+  res.redirect('/public/index.html');
+})
 
 var users = {
   soneda: 'abcdefg'
