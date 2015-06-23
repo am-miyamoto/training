@@ -67,11 +67,7 @@ var users = {
 };
 
 app.get('/test', function(req, res){
-  console.log(req.query);
   var username = req.query.username;
-  console.log(username);
-  console.log(users.soneda);
-  console.log(users[username]);
   if(users[username] && req.query.password === users[username]) {
     res.send('ok');
   } else {
@@ -94,8 +90,6 @@ app.post('/test', function(req, res){
 // console.log(req.params);
 // console.log(req.path);
 // console.log(req.query);
-
-
 
 // server start
 console.log('listen at 3000');
