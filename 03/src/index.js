@@ -2,8 +2,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 // var users = require('./model/users')
-var Database = require('./model/users')
-var db = new Database('');
+var config = require('./config');
+var Database = require('./model/users');
+var db = new Database(config.dbhost);
 
 var app = express();
 
