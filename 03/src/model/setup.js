@@ -26,7 +26,7 @@ sequelize.sync().then(function(result) {
   var userDeletePromises = users.map(function(user) {
     return user.destroy();
   });
-  Promise.all(userDeletePromises);
+  return Promise.all(userDeletePromises);
 }).then(function(result) {
   console.log('deleted');
   var userSavePromises = users_data.map(function(user_data) {
