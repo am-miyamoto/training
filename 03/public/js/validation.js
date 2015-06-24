@@ -62,3 +62,7 @@ var error_messages = [
     message: 'Passwordに使える文字は英小大文字と-,+,!,@です'
   }
 ];
+
+if(typeof module === 'object') {
+  module.exports.validation = validation;
+}

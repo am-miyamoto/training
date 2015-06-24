@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 // var users = require('./model/users')
 var config = require('./config');
 var Database = require('./model/users');
+var validater = require('../public/js/validation');
 var db = new Database(config.dbhost);
 
 var app = express();
@@ -87,6 +88,12 @@ app.get('/test', function(req, res){
 app.post('/test', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
+
+  var errors = validater.validation({username: username, password: password});
+  if(errors.length > 0) {
+    return res.send(errors.join(','));
+  }
+
   db.connect()
   .then(function(result) {
     return db.login(username, password);
