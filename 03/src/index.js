@@ -59,8 +59,8 @@ app.post('/submit', function(req, res) {
 // GET /ejs
 app.get('/ejs', function(req, res) {
    var id = req.query.id;
-  res.redirect('/hello');
-  // res.render('index', {id: id});
+  // res.redirect('/hello');
+  res.render('index', {id: id});
 });
 
 app.get('/', function(req, res) {
