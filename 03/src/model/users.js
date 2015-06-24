@@ -1,6 +1,6 @@
 // var fs = require('fs');
 var Sequelize = require('sequelize');
-var db = 'mysql://root:password@10.63.82.28:3306/miyamoto';
+var db = '';
 // var sequelize = new Sequelize(db);
 
 function database(db) {

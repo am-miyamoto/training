@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 // var users = require('./model/users')
 var Database = require('./model/users')
-var db = new Database('mysql://root:password@10.63.82.28:3306/miyamoto');
+var db = new Database('');
 
 var app = express();
 
