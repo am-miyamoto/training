@@ -1,7 +1,4 @@
-// var fs = require('fs');
 var Sequelize = require('sequelize');
-var db = '';
-// var sequelize = new Sequelize(db);
 
 function database(db) {
   this.sequelize = new Sequelize(db);
@@ -14,7 +11,8 @@ function database(db) {
     },
     {
       timestamps: false
-    });
+    }
+  );
 }
 
 database.prototype.connect = function() {
