@@ -1,7 +1,10 @@
 // require
 var express = require('express');
 var bodyParser = require('body-parser');
-var users = require('./model/users')
+// var users = require('./model/users')
+var Database = require('./model/users')
+var db = new Database('mysql://root:password@10.63.82.28:3306/miyamoto');
+
 var app = express();
 
 // setting
@@ -83,18 +86,18 @@ app.get('/test', function(req, res){
 app.post('/test', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
-
-  users.login(username, password, function(err, result) {
-    console.log(err, result);
-    if (err) {
-      return res.send('ng');
-    }
-
+  db.connect()
+  .then(function(result) {
+    return db.login(username, password);
+  }).then(function(result) {
+    console.log(result);
     if (result === true) {
       return res.send('ok');
-    } else {
-      return res.send('ng');
     }
+    return res.send('ng');
+  }).catch(function(error) {
+    console.log(error);
+    return res.send('ng');
   });
 });
 

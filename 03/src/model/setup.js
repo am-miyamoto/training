@@ -12,7 +12,8 @@ var Users = sequelize.define('users', {
  });
 
 var users_data = [
-  { username: 'a', password: 'a@@' },
+  { username: 'soneda', password: 'aaaaaa' },
+  { username: 'miyamoto', password: 'bbbbbb' },
   { username: 'b', password: 'b@@' },
   { username: 'c', password: 'c@@' },
   { username: 'd', password: 'd@@' },
