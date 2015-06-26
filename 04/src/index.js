@@ -18,7 +18,7 @@ app.get('/login', function(req, res) {
   return res.render('login', { error_reason: '' });
 });
 
-app.post('/validation', function(req, res) {
+app.post('/login', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
   var params = {
@@ -50,7 +50,7 @@ app.get('/register', function(req, res) {
   return res.render('register');
 });
 
-app.post('/registration', function(req, res) {
+app.post('/register', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
   var params = {
