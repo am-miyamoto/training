@@ -71,7 +71,7 @@ app.post('/register', function(req, res) {
     return showMainPage(res, user.username);
   }).catch(function(error) {
     console.log(error);
-    return res.send('ng');
+    return res.statu(500).send('server error');
   });
 });
 

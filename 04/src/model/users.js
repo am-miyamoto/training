@@ -48,15 +48,15 @@ database.prototype.register = function register(username, password) {
 };
 
 database.prototype.getUsernames = function() {
-  return this.Users.findAll({
+  return this.Users.findAll( {
     order: [['username', 'ASC']]
   })
-   .then(function(users) {
-     var usernames = users.map(function(user) {
-       return user.username;
-     });
-     return usernames;
-   });
+  .then(function(users) {
+    var usernames = users.map(function(user) {
+      return user.username;
+    });
+    return usernames;
+  });
 };
 
 module.exports = database;
