@@ -36,4 +36,13 @@ database.prototype.login = function(username, password) {
   });
 };
 
+database.prototype.register = function register(username, password) {
+  var params = {
+    username: username,
+    password: password
+  };
+  var user = this.Users.build(params);
+  return user.save();
+};
+
 module.exports = database;

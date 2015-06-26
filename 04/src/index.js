@@ -45,4 +45,34 @@ app.post('/validation', function(req, res) {
     return res.send('ng');
   });
 });
+
+app.get('/register', function(req, res) {
+  return res.render('register');
+});
+
+app.post('/registration', function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+  var params = {
+    username: username,
+    password: password
+  };
+
+  var errors = validater.validation(params);
+  if(errors.length > 0) {
+    return res.send(errors.join(','));
+  }
+
+  db.connect()
+  .then(function(result) {
+    return db.register(username, password);
+  }).then(function(user) {
+    console.log(user);
+    return res.render('main', { username: username });
+  }).catch(function(error) {
+    console.log(error);
+    return res.send('ng');
+  });  
+});
+
 module.exports.app = app;
