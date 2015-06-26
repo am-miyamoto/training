@@ -15,7 +15,7 @@ app.use('/public', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/login', function(req, res) {
-  return res.render('login');
+  return res.render('login', { error_reason: '' });
 });
 
 app.post('/validation', function(req, res) {
@@ -39,10 +39,10 @@ app.post('/validation', function(req, res) {
     if (result === true) {
       return showMainPage(res, username);
     }
-    return res.send('ng');
+    return res.status(401).render('login', { error_reason: 'ログイン情報が間違っています' });
   }).catch(function(error) {
     console.log(error);
-    return res.send('ng');
+    return res.status(500).send('server error');
   });
 });
 
