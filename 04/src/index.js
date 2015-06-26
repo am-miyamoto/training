@@ -1,9 +1,12 @@
 var express = require('express')
 , bodyParser = require('body-parser')
 , config = ('./config')
-, validater = require('../public/js/validation');
+, validater = require('../public/js/validation')
+, config = require('config')
+, Database = require('./model/users')
 ;
 
+var db = new Database(config.database);
 var app = express();
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
@@ -27,7 +30,19 @@ app.post('/validation', function(req, res) {
   if(errors.length > 0) {
     return res.send(errors.join(','));
   }
-  return res.render('main', { username: username });
 
+  db.connect()
+  .then(function(result) {
+    return db.login(username, password);
+  }).then(function(result) {
+    console.log(result);
+    if (result === true) {
+      return res.render('main', { username: username });
+    }
+    return res.send('ng');
+  }).catch(function(error) {
+    console.log(error);
+    return res.send('ng');
+  });
 });
 module.exports.app = app;
