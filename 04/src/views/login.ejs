@@ -6,12 +6,15 @@
   <script type="text/javascript" src="public/js/login.js"></script>
 </head>
 <body>
+  <h1>Login Form</h1>
   <form id="loginForm" method="post" action="/login">
     <ul id="errors">
-      <% if(error_reason) { %>
-      <li>
-        <%= error_reason %>
-      </li>
+      <% if(error_reasons) { %>
+        <% error_reasons.forEach(function(error) { %>
+          <li>
+          <%= error %>
+          </li>
+        <% }); %>
       <% } %>
     </ul>
     <label for="username">USERNAME:</labal>

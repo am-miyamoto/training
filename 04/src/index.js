@@ -28,7 +28,7 @@ app.post('/login', function(req, res) {
 
   var errors = validater.validation(params);
   if(errors.length > 0) {
-    return res.send(errors.join(','));
+    return res.status(401).render('login', { error_reasons: errors });
   }
 
   db.connect()
@@ -39,7 +39,7 @@ app.post('/login', function(req, res) {
     if (result === true) {
       return showMainPage(res, username);
     }
-    return res.status(401).render('login', { error_reason: 'ログイン情報が間違っています' });
+    return res.status(401).render('login', { error_reasons: 'ログイン情報が間違っています' });
   }).catch(function(error) {
     console.log(error);
     return res.status(500).send('server error');
