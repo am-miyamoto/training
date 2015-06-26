@@ -1,7 +1,9 @@
 var Sequelize = require('sequelize');
 
 function database(config) {
-  this.sequelize = new Sequelize(config.dbname, config.username, config.password);
+  var options = {};
+  options.host = config.host;
+  this.sequelize = new Sequelize(config.dbname, config.username, config.password, options);
 
   this.Users = this.sequelize.define('users',
     {
