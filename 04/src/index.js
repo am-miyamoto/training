@@ -28,7 +28,7 @@ app.post('/login', function(req, res) {
 
   var errors = validater.validation(params);
   if(errors.length > 0) {
-    return res.status(401).render('login', { error_reasons: errors });
+    return res.status(400).render('login', { error_reasons: errors });
   }
 
   db.connect()
