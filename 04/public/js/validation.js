@@ -7,26 +7,46 @@
  */
 function validation(params) {
   var errors = [];
-  if (!params.username) {
-    errors.push('usernameを入力して下さい');
+  errors = errors.concat(usernameValidater(params.username));
+  errors = errors.concat(passwordValidater(params.password));
+  return errors;
+}
+
+function usernameValidater(username) {
+  var errors = [];
+  var username_rule = {
+    min_length: 4,
+    max_length: 8,
+    char_rule: new RegExp('[^(a-zA-Z\-_)]')
+  };
+  if (!username) {
+    errors.push(setErrorMessage('username_empty'));
   } else {
-    if (params.username.length < 2 || params.username.length > 8) {
-      errors.push('usernameは2から8文字です');
+    if (username.length < username_rule.min_length || username.length > username_rule.max_length) {
+      errors.push(setErrorMessage('username_irregal_length'));
     }
-    if (params.username.match(/[^(a-z\-)]/)) {
-      errors.push('usernameに使える文字は英小文字と-(ハイフン)です');
+    if (username.match(username_rule.char_rule)) {
+      errors.push(setErrorMessage('username_irregal_chara'));
     }
   }
+  return errors;
+}
 
-  if (!params.password) {
-    errors.push('Passwordを入力して下さい');
+function passwordValidater(password) {
+  var password_rule = {
+    min_length: 6,
+    max_length: 8,
+    char_rule: new RegExp('[^(a-zA-z\-\+!@#\*&\^%~)]')
+  };
+  var errors = [];
+  if (!password) {
+    errors.push(setErrorMessage('password_empty'));
   } else {
-    if (params.password.length < 6 || params.password.length > 24) {
-      errors.push('Passwordは6から24文字です');
-    }
-    if (params.password.match(/[^(a-zA-z\-\+!@)]/)) {
-      // errors.push('Passwordに使える文字は英小大文字と-,+,!,@です');
+    if (password.length < password_rule.min_length || password.length > password_rule.max_length) {
       errors.push(setErrorMessage('password_irregal_length'));
+    }
+    if (password.match(password_rule.char_rule)) {
+      errors.push(setErrorMessage('password_irregal_chara'));
     }
   }
   return errors;
@@ -47,19 +67,19 @@ var error_messages = [
      message: 'usernameを入力して下さい'
   },
   {  key: 'username_irregal_chara',
-    message: 'usernameに使える文字は英小文字と-(ハイフン)です'
+    message: 'usernameに使える文字は英大小文字と-(ハイフン)です'
   },
   {  key: 'username_irregal_length',
-    message: 'usernameは2から8文字です'
+    message: 'usernameは4から8文字です'
   },
   {  key: 'password_empty',
      message: 'Passwordを入力して下さい'
   },
   {  key: 'password_irregal_chara',
-    message: 'Passwordは6から24文字です'
+    message: 'Passwordに使える文字は英大小文字と-,+,!,@,#,*,&,^,%,~です'
   },
   {  key: 'password_irregal_length',
-    message: 'Passwordに使える文字は英小大文字と-,+,!,@です'
+    message: 'Passwordは6から8文字です'
   }
 ];
 
