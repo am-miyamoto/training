@@ -15,7 +15,7 @@ app.use('/public', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/login', function(req, res) {
-  return res.render('login', { error_reason: '' });
+  return res.render('login', { error_reasons: '' });
 });
 
 app.post('/login', function(req, res) {
@@ -47,7 +47,7 @@ app.post('/login', function(req, res) {
 });
 
 app.get('/register', function(req, res) {
-  return res.render('register');
+  return res.render('register', { error_reasons: '' });
 });
 
 app.post('/register', function(req, res) {
@@ -60,7 +60,6 @@ app.post('/register', function(req, res) {
 
   var errors = validater.validation(params);
   if(errors.length > 0) {
-    // return res.send(errors.join(','));
     return res.status(400).render('register', { error_reasons: errors })
   }
 
