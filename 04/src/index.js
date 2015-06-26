@@ -37,7 +37,7 @@ app.post('/validation', function(req, res) {
   }).then(function(result) {
     console.log(result);
     if (result === true) {
-      return res.render('main', { username: username });
+      return showMainPage(res, username);
     }
     return res.send('ng');
   }).catch(function(error) {
@@ -68,11 +68,20 @@ app.post('/registration', function(req, res) {
     return db.register(username, password);
   }).then(function(user) {
     console.log(user);
-    return res.render('main', { username: username });
+    return showMainPage(res, user.username);
   }).catch(function(error) {
     console.log(error);
     return res.send('ng');
-  });  
+  });
 });
+
+function showMainPage(res, myname) {
+  return db.getUsernames()
+  .then(function(usernames) {
+    return res.render('main', { myname: myname, usernames: usernames });
+  }).catch(function(error) {
+    return res.send(error);
+  });
+}
 
 module.exports.app = app;

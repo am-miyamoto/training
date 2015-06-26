@@ -1,4 +1,9 @@
 <title>main</title>
 
 <h1>main</h1>
-<p>hello, <strong><%= username %></strong></p>
+<p>hello, <strong><%= myname %></strong></p>
+<ul id="userlist">
+<% usernames.forEach(function(username) { %>
+  <li><%= username %></li>
+<% }); %>
+</ul>
