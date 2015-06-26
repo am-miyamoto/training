@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>lgoin</title>
+  <title>register</title>
   <script type="text/javascript" src="public/js/validation.js"></script>
   <script type="text/javascript" src="public/js/register.js"></script>
 </head>
 <body>
+  <h1>Registration Form</h1>
   <form id="registerForm" method="post" action="/register">
-    <ul id="errors"></ul>
+    <ul id="errors">
+      <% if(error_reasons) { %>
+        <% error_reasons.forEach(function(error) { %>
+          <li>
+          <%= error %>
+          </li>
+        <% }); %>
+      <% } %>
+    </ul>
     <label for="username">USERNAME:</labal>
     <input type="text" id="username" name="username" maxlength="8" required ></br>
     <label for="password">PASSWORD:</label>

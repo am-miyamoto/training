@@ -60,14 +60,14 @@ app.post('/register', function(req, res) {
 
   var errors = validater.validation(params);
   if(errors.length > 0) {
-    return res.send(errors.join(','));
+    // return res.send(errors.join(','));
+    return res.status(400).render('register', { error_reasons: errors })
   }
 
   db.connect()
   .then(function(result) {
     return db.register(username, password);
   }).then(function(user) {
-    console.log(user);
     return showMainPage(res, user.username);
   }).catch(function(error) {
     console.log(error);
