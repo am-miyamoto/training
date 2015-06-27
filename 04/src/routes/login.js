@@ -25,7 +25,7 @@ router.post('/', function(req, res) {
     return db.login(username, password);
   }).then(function(result) {
     if (result !== true) {
-      return res.status(401).render('login', { error_reasons: 'ログイン情報が間違っています' });
+      return res.status(401).render('login', { error_reasons: ['ログイン情報が間違っています'] });
     }
     return db.getUsernames();
   }).then(function(usernames) {
