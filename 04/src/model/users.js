@@ -7,7 +7,6 @@ function database(config) {
 
   this.Users = this.sequelize.define('users',
     {
-      id: Sequelize.INTEGER,
       username: Sequelize.STRING,
       password: Sequelize.STRING
     },
