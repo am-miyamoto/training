@@ -16,11 +16,37 @@ var username_true = [
   , 'aB-_cD'
 ];
 
+var password_true = [
+    'aaaaaa'
+  , 'abcdef'
+  , 'ABCDEF'
+  , 'aBcDeF'
+  , '-+!@#*'
+  , '&^%~aA'
+  , 'aaaaaaaa'
+  , 'abcdefgh'
+  , 'ABCDEFGH'
+  , 'aBcDeFgH'
+  , '-+!@#*&^'
+  , '%~aA#*&^'
+];
+
 describe('validation username', function() {
   it('username is true', function(done) {
     username_true.forEach(function(username) {
       console.log(username);
       var errors = validater.validation({ username: username, password: 'aaaaaa' });
+      assert.strictEqual(errors.length, 0);
+    });
+    done();
+  });
+});
+
+describe('validation password', function() {
+  it('password is true', function(done) {
+    password_true.forEach(function(password) {
+      console.log(password);
+      var errors = validater.validation({ username: 'aaaaaaa', password: password });
       assert.strictEqual(errors.length, 0);
     });
     done();
