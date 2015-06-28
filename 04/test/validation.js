@@ -43,31 +43,28 @@ var password_true = [
 ];
 
 describe('validation username', function() {
-  it('username is valid', function(done) {
+  it('username is valid', function() {
     username_true.forEach(function(username) {
       console.log(username);
       var errors = validater.validation({ username: username, password: 'aaaaaa' });
       assert.strictEqual(errors.length, 0);
     });
-    done();
   });
-  it('username is invalid', function(done) {
+  it('username is invalid', function() {
     username_false.forEach(function(username) {
       console.log(username);
       var errors = validater.validation({ username: username, password: 'aaaaaa' });
       assert.notStrictEqual(errors.length, 0);
     });
-    done();
   });
 });
 
 describe('validation password', function() {
-  it('password is valid', function(done) {
+  it('password is valid', function() {
     password_true.forEach(function(password) {
       console.log(password);
       var errors = validater.validation({ username: 'aaaaaaa', password: password });
       assert.strictEqual(errors.length, 0);
     });
-    done();
   });
 });
