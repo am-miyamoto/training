@@ -72,10 +72,6 @@ app.get('/', function(req, res) {
   res.redirect('/public/index.html');
 })
 
-// var users = {
-//   soneda: 'abcdefg'
-// };
-
 app.get('/test', function(req, res){
   var username = req.query.username;
   if(users[username] && req.query.password === users[username]) {
@@ -89,7 +85,7 @@ app.post('/test', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
 
-  var errors = validater.validation({username: username, password: password});
+  var errors = validater.validation({ username: username, password: password });
   if(errors.length > 0) {
     return res.send(errors.join(','));
   }
