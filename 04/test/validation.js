@@ -2,7 +2,7 @@ var validater = require('../public/js/validation')
   , assert = require('assert')
   ;
 
-var username_true = [
+var username_valid = [
     'aaaa'
   , 'abcd'
   , 'ABCD'
@@ -16,7 +16,7 @@ var username_true = [
   , 'aB-_cD'
 ];
 
-var username_false = [
+var username_invalid = [
     'aaa'
   , 'abc'
   , 'ABC'
@@ -27,7 +27,7 @@ var username_false = [
   , 'ABCDEFGHI'
 ];
 
-var password_true = [
+var password_valid = [
     'aaaaaa'
   , 'abcdef'
   , 'ABCDEF'
@@ -44,14 +44,14 @@ var password_true = [
 
 describe('validation username', function() {
   it('username is valid', function() {
-    username_true.forEach(function(username) {
+    username_valid.forEach(function(username) {
       console.log(username);
       var errors = validater.validation({ username: username, password: 'aaaaaa' });
       assert.strictEqual(errors.length, 0);
     });
   });
   it('username is invalid', function() {
-    username_false.forEach(function(username) {
+    username_invalid.forEach(function(username) {
       console.log(username);
       var errors = validater.validation({ username: username, password: 'aaaaaa' });
       assert.notStrictEqual(errors.length, 0);
@@ -61,7 +61,7 @@ describe('validation username', function() {
 
 describe('validation password', function() {
   it('password is valid', function() {
-    password_true.forEach(function(password) {
+    password_valid.forEach(function(password) {
       console.log(password);
       var errors = validater.validation({ username: 'aaaaaaa', password: password });
       assert.strictEqual(errors.length, 0);
