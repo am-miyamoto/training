@@ -16,6 +16,6 @@ app.use('/public', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/login', require('./routes/login'));
 app.use('/register', require('./routes/register'));
-// app.use('/main', require('./routes/main'));
+app.use('/main', require('./routes/main'));
 
 module.exports.app = app;
