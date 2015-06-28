@@ -42,6 +42,15 @@ var password_valid = [
   , '%~aA#*&^'
 ];
 
+var password_invalid = [
+    'aaaaa'
+  , 'ABCDE'
+  , 'aBcDe'
+  , '=!_-_|'
+  , 'abcdefghi'
+  , 'ABCDEFGHI'
+];
+
 describe('validation username', function() {
   it('username is valid', function() {
     username_valid.forEach(function(username) {
@@ -65,6 +74,13 @@ describe('validation password', function() {
       console.log(password);
       var errors = validater.validation({ username: 'aaaaaaa', password: password });
       assert.strictEqual(errors.length, 0);
+    });
+  });
+  it('password is invalid', function() {
+    password_invalid.forEach(function(password) {
+      console.log(password);
+      var errors = validater.validation({ username: 'aaaaaaa', password: password });
+      assert.notStrictEqual(errors.length, 0);
     });
   });
 });
