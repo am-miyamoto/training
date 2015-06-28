@@ -27,5 +27,8 @@
     "express": "^4.13.0",
     "mysql": "^2.7.0",
     "sequelize": "^3.3.2"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5"
   }
 }

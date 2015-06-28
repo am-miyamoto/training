@@ -1,6 +1,5 @@
 var express = require('express')
 , bodyParser = require('body-parser')
-, config = ('./config')
 , validater = require('../public/js/validation')
 , config = require('config')
 , Database = require('./model/users')
