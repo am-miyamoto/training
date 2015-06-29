@@ -17,14 +17,15 @@ var username_valid = [
 ];
 
 var username_invalid = [
-    'aaa'
-  , 'abc'
-  , 'ABC'
-  , 'aBc'
-  , '!_-_'
-  , '-+!@#*'
-  , 'abcdefghi'
-  , 'ABCDEFGHI'
+    [ 'aaa', 1 ]
+  , [ 'abc', 1 ]
+  , [ 'ABC', 1 ]
+  , [ 'aBc', 1 ]
+  , [ '!-_', 2 ]
+  , [ '-+!@#*', 1 ]
+  , [ 'abcdefghi', 1 ]
+  , [ 'ABCDEFGHI', 1 ]
+  , [ 'aBc!EFGHI', 2 ]
 ];
 
 var password_valid = [
@@ -43,12 +44,14 @@ var password_valid = [
 ];
 
 var password_invalid = [
-    'aaaaa'
-  , 'ABCDE'
-  , 'aBcDe'
-  , '=!_-_|'
-  , 'abcdefghi'
-  , 'ABCDEFGHI'
+    [ 'aaaaa', 1 ]
+  , [ 'ABCDE', 1 ]
+  , [ 'aBcDe', 1 ]
+  , [ '=!-_|', 2 ]
+  , [ '=!_-_|', 1 ]
+  , [ 'abcdefghi', 1 ]
+  , [ 'ABCDEFGHI', 1 ]
+  , [ '||CDEFGHI', 2 ]
 ];
 
 describe('validation username', function() {
@@ -60,10 +63,10 @@ describe('validation username', function() {
     });
   });
   it('username is invalid', function() {
-    username_invalid.forEach(function(username) {
-      console.log(username);
-      var errors = validater.validation({ username: username, password: 'aaaaaa' });
-      assert.notStrictEqual(errors.length, 0);
+    username_invalid.forEach(function(invalid_arry) {
+      console.log(invalid_arry);
+      var errors = validater.validation({ username: invalid_arry[0], password: 'aaaaaa' });
+      assert.strictEqual(errors.length, invalid_arry[1]);
     });
   });
 });
@@ -77,10 +80,10 @@ describe('validation password', function() {
     });
   });
   it('password is invalid', function() {
-    password_invalid.forEach(function(password) {
-      console.log(password);
-      var errors = validater.validation({ username: 'aaaaaaa', password: password });
-      assert.notStrictEqual(errors.length, 0);
+    password_invalid.forEach(function(invalid_arry) {
+      console.log(invalid_arry);
+      var errors = validater.validation({ username: 'aaaaaaa', password: invalid_arry[0] });
+      assert.strictEqual(errors.length, invalid_arry[1]);
     });
   });
 });
