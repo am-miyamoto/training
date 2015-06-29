@@ -1,5 +1,6 @@
 var express = require('express')
   , validater = require('../../public/js/validation')
+  , session = require('express-session')
   , Users = require('../model/users')
   ;
 var router = express.Router();
@@ -25,10 +26,11 @@ router.post('/', function(req, res) {
   .then(function(result) {
     return db.register(username, password);
   }).then(function(user) {
-    return res.redirect('/main?myname=' + username);
+    req.session.name = username;
+    return res.redirect('/main');
   }).catch(function(err) {
     console.log(err);
-    return res.statu(500).send('server error');
+    return res.status(500).send('server error');
   });
 });
 

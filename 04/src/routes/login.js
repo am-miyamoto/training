@@ -1,6 +1,7 @@
 var express = require('express')
   , validater = require('../../public/js/validation')
   , Users = require('../model/users')
+  , session = require('express-session')
   ;
 var router = express.Router();
 
@@ -28,7 +29,8 @@ router.post('/', function(req, res) {
     if (result !== true) {
       return res.status(401).render('login', { error_reasons: ['ログイン情報が間違っています'] });
     }
-    return res.redirect('/main?myname=' + username);
+    req.session.name = username;
+    return res.redirect('/main');
   }).catch(function(err) {
     console.log(err);
     return res.status(500).send('server error');

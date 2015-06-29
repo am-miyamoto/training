@@ -1,13 +1,14 @@
 var express = require('express')
   , Users = require('../model/users')
+  , session = require('express-session')
   ;
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  if (!req.query.myname) {
+  var myname = req.session.name;
+  if (!myname) {
     return res.redirect('/login');
   };
-  var myname = req.query.myname;
   var db = new Users();
   return db.connect()
   .then(function() {
