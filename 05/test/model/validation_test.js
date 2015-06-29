@@ -1,9 +1,10 @@
 var assert = require('assert');
 var validater = require('../../src/model/validation');
 
+// 数だけじゃなく、中身もテスト
 describe('validation', function() {
   var test_data = [
-  { username: 'username',  password: 'password',   errorsNumber: 0 },
+  { username: 'username',  password: 'password',   errorsNumber: 0 }, // Number -> Count
   { username: 'user',      password: 'passwo',     errorsNumber: 0 },
   { username: 'abc',       password: 'abcde',      errorsNumber: 2 },
   { username: 'abcdefghi', password: 'abcdefghi',  errorsNumber: 2 },
