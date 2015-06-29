@@ -1,5 +1,8 @@
 // test
 var app = require('./src').app;
 
-console.log('start server at 3000 port');
-app.listen(3000);
+app.listen(3000, function(err) {
+  if(!err) {
+    console.log('start server at 3000 port');
+  }
+});
