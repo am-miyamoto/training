@@ -5,6 +5,9 @@ var validater = require('./model/validation');
 var users = require('./model/users');
 var config = require('../config/config');
 var db = new users.DB(config.db.mysql);
+// better
+var DB = require('users').DB;
+var db = new DB();
 
 // ejs setting
 app.set('views', __dirname + '/views');
@@ -20,7 +23,7 @@ app.get('/', function(req, res) {
     return db.findAll({ order: [['username', 'ASC']] });
   }).then(function(data) {
     var users = [];
-    data.forEach(function(row) {
+    data.forEach(function(row) { // map
       var user = row.get({ plain: true });
       users.push(user);
     });
@@ -74,7 +77,7 @@ app.post('/register', function(req, res) {
   }).then(function(result) {
     res.status(201).render('success');
   }).catch(function(err) {
-    console.log(err);
+    console.log(err); // console.error
     return res.status(500).send('SERVER ERROR');
   });
 });
