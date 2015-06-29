@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 
-function database(config) {
+function Database(config) {
   var options = {};
   options.host = config.host;
   if(config.logging === 'false') {
@@ -19,11 +19,11 @@ function database(config) {
   );
 }
 
-database.prototype.connect = function() {
+Database.prototype.connect = function() {
   return this.sequelize.sync();
 }
 
-database.prototype.login = function(username, password) {
+Database.prototype.login = function(username, password) {
   return this.Users.findOne( {
       where: {
         username: username
@@ -40,7 +40,7 @@ database.prototype.login = function(username, password) {
   });
 };
 
-database.prototype.register = function register(username, password) {
+Database.prototype.register = function register(username, password) {
   var params = {
     username: username,
     password: password
@@ -49,7 +49,7 @@ database.prototype.register = function register(username, password) {
   return user.save();
 };
 
-database.prototype.getUsernames = function() {
+Database.prototype.getUsernames = function() {
   return this.Users.findAll( {
     order: [['username', 'ASC']]
   })
@@ -61,4 +61,4 @@ database.prototype.getUsernames = function() {
   });
 };
 
-module.exports = database;
+module.exports = Database;
