@@ -28,7 +28,7 @@ DB.prototype.login = function(username, password) {
     });
 };
 
-DB.prototype.regist = function(username, password) {
+DB.prototype.regist = function(username, password) { // "regist 変数名" で ggr
   var user = this.Users.build({ username: username, password: password });
   return user.save();
 };
