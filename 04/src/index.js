@@ -2,11 +2,8 @@ var express = require('express')
 , bodyParser = require('body-parser')
 , validater = require('../public/js/validation')
 , config = require('config')
-, Database = require('./model/users')
 ;
 
-var db = new Database(config.database);
-global.db = db; // TODO remove db from global scope.
 var app = express();
 app.set('views', './src/views');
 app.set('view engine', 'ejs');

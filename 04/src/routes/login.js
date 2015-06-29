@@ -1,5 +1,6 @@
 var express = require('express')
   , validater = require('../../public/js/validation')
+  , Users = require('../model/users')
   ;
 var router = express.Router();
 
@@ -19,7 +20,7 @@ router.post('/', function(req, res) {
   if(errors.length > 0) {
     return res.status(400).render('login', { error_reasons: errors });
   }
-
+  var db = new Users();
   db.connect()
   .then(function(result) {
     return db.login(username, password);
@@ -33,5 +34,4 @@ router.post('/', function(req, res) {
     return res.status(500).send('server error');
   });
 });
-
 module.exports = router;

@@ -1,13 +1,8 @@
-var Sequelize = require('sequelize');
+var Sequelize = require('sequelize')
+  , connection = require('./connection');
 
-function Database(config) {
-  var options = {};
-  options.host = config.host;
-  if(config.logging === 'false') {
-    options.logging = false;
-  }
-  this.sequelize = new Sequelize(config.dbname, config.username, config.password, options);
-
+function Database() {
+  this.sequelize = connection.getConnection();
   this.Users = this.sequelize.define('users',
     {
       username: Sequelize.STRING,
