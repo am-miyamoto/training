@@ -25,8 +25,8 @@ router.post('/', function(req, res) {
     return db.register(username, password);
   }).then(function(user) {
     return res.redirect('/main?myname=' + username);
-  }).catch(function(error) {
-    console.log(error);
+  }).catch(function(err) {
+    console.log(err);
     return res.statu(500).send('server error');
   });
 });

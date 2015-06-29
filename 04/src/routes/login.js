@@ -28,8 +28,8 @@ router.post('/', function(req, res) {
       return res.status(401).render('login', { error_reasons: ['ログイン情報が間違っています'] });
     }
     return res.redirect('/main?myname=' + username);
-  }).catch(function(error) {
-    console.log(error);
+  }).catch(function(err) {
+    console.log(err);
     return res.status(500).send('server error');
   });
 });
