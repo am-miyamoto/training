@@ -1,11 +1,12 @@
 var Sequelize = require('sequelize');
 
-function database(config) {
+function database(config) { // コンストラクタ関数は大文字始まり
   var options = {};
   options.host = config.host;
   if(config.logging === 'false') {
     options.logging = false;
   }
+  // ここだけが一回にしたい。 global ではなく module local を使う方がまだ良い
   this.sequelize = new Sequelize(config.dbname, config.username, config.password, options);
 
   this.Users = this.sequelize.define('users',
