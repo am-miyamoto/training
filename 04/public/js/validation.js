@@ -62,6 +62,9 @@ function setErrorMessage(error) {
   return message;
 }
 
+var error_messages = {
+  'username_empty': 'usernameを入力して下さい'
+}
 var error_messages = [
   {  key: 'username_empty',
      message: 'usernameを入力して下さい'
