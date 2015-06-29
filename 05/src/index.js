@@ -66,7 +66,7 @@ app.post('/register', function(req, res) {
   var params = { username: username, password: password };
   var result = validater.validation(params);
   if (result.length > 0) {
-    return res.status(400).send('NG');
+    return res.status(400).send('NG'); // 画面にメッセージとして表示
   }
 
   db.connect().then(function() {
@@ -75,7 +75,7 @@ app.post('/register', function(req, res) {
     res.status(201).render('success');
   }).catch(function(err) {
     console.log(err);
-    return res.status(500).send('SERVER ERROR');
+    return res.status(500).send('SERVER ERROR'); // 画面にメッセージとして表示
   });
 });
 
