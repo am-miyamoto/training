@@ -4,7 +4,8 @@
   "description": "you can register users and login.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./node_modules/mocha/bin/_mocha ./test/*.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
