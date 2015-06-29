@@ -1,5 +1,5 @@
 var express = require('express')
-  , validater = require('../../public/js/validation')
+  , validater = require('../../public/js/validation') // エイリアスをサーバ内に置く方が良い
   ;
 var router = express.Router();
 
@@ -27,9 +27,11 @@ router.post('/', function(req, res) {
     if (result !== true) {
       return res.status(401).render('login', { error_reasons: ['ログイン情報が間違っています'] });
     }
+    // 1, session を使う
+    // 2, URL を文字列操作で作らない
     return res.redirect('/main?myname=' + username);
-  }).catch(function(error) {
-    console.log(error);
+  }).catch(function(error) { // err
+    console.log(error); // console.error(err)
     return res.status(500).send('server error');
   });
 });
