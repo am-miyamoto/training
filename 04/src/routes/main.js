@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
   var myname = req.query.myname;
   return db.getUsernames()
   .then(function(usernames) {
-    return res.render('main', { myname: myname,  usernames: usernames });;
+    return res.render('main', { myname: myname,  usernames: usernames });
   });
 });
 

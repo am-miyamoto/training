@@ -3,6 +3,7 @@
     "host": "localhost",
     "dbname": "name",
     "username": "user",
-    "password": "pass"
+    "password": "pass",
+    "logging": "false"
   }
 }

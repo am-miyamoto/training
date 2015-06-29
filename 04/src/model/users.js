@@ -3,6 +3,9 @@ var Sequelize = require('sequelize');
 function database(config) {
   var options = {};
   options.host = config.host;
+  if(config.logging === 'false') {
+    options.logging = false;
+  }
   this.sequelize = new Sequelize(config.dbname, config.username, config.password, options);
 
   this.Users = this.sequelize.define('users',
