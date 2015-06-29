@@ -64,6 +64,9 @@ describe('validation username', function() {
       console.log(username);
       var errors = validater.validation({ username: username, password: 'aaaaaa' });
       assert.notStrictEqual(errors.length, 0);
+      assert(errors.length > 0, 'error が一つ以上存在する');
+      assert.strictEqual(errors.lenght, 2, 'error が二つ存在する');
+      assert.deepEqual(errors, ['error1', 'error2']);
     });
   });
 });
