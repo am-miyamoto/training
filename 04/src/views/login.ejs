@@ -8,7 +8,7 @@
 <body>
   <h1>Login Form</h1>
   <form id="loginForm" method="post" action="/login">
-    <ul id="errors">
+    <ul id="errors"><!-- ul も if の中 -->
       <% if(error_reasons) { %>
         <% error_reasons.forEach(function(error) { %>
           <li>
