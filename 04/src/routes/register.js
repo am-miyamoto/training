@@ -22,7 +22,7 @@ router.post('/', function(req, res) {
 
   var errors = validater.validation(params);
   if(errors.length > 0) {
-    return res.status(400).render('register', { error_reasons: errors })
+    return res.status(400).render('register', { error_reasons: errors });
   }
   var db = new Users();
   db.connect()
@@ -32,8 +32,12 @@ router.post('/', function(req, res) {
     req.session.name = username;
     return res.redirect('/main');
   }).catch(function(err) {
+    var err_arry = [];
+    err_arry.push(err);
     console.log(err);
-    return res.status(500).send('server error');
+    return res.status(400).render('register', { error_reasons: err_arry });
+    // return res.status(500).send('server error');
+    // return res.status(500).send('server error');
   });
 });
 

@@ -41,7 +41,10 @@ Database.prototype.register = function register(username, password) {
     password: password
   };
   var user = this.Users.build(params);
-  return user.save();
+  return user.save()
+  .catch(function(err) {
+    return Promise.reject('そのユーザー名は既に登録されています');
+  });
 };
 
 Database.prototype.getUsernames = function() {
