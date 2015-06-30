@@ -12,9 +12,12 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
+  var confirm_password = req.body.confirm_password;
+
   var params = {
     username: username,
-    password: password
+    password: password,
+    confirm_password: confirm_password
   };
 
   var errors = validater.validation(params);
