@@ -63,7 +63,20 @@ var password_confirm_failed = [
   , [ '%~aA#*&^', '%~aA#*&-', 1 ]
 ];
 
-describe('username validation is succeeded: ', function() {
+describe('username validation is succeeded at login: ', function() {
+  username_valid.forEach(function(username) {
+    it('username is ' + username, function() {
+      var params = {
+        username: username,
+        password: 'aaaaaa'
+      };
+      var errors = validater.loginValidation(params);
+      assert.strictEqual(errors.length, 0);
+    });
+  });
+});
+
+describe('username validation is succeeded at register: ', function() {
   username_valid.forEach(function(username) {
     it('username is ' + username, function() {
       var params = {
@@ -71,13 +84,26 @@ describe('username validation is succeeded: ', function() {
         password: 'aaaaaa',
         confirm_password: 'aaaaaa'
       };
-      var errors = validater.validation(params);
+      var errors = validater.registerValidation(params);
       assert.strictEqual(errors.length, 0);
     });
   });
 });
 
-describe('username validation is failed: ', function() {
+describe('username validation is failed at login: ', function() {
+  username_invalid.forEach(function(invalid_arry) {
+    it('username is ' + invalid_arry[0], function() {
+      var params = {
+        username: invalid_arry[0],
+        password: 'aaaaaa'
+      };
+      var errors = validater.loginValidation(params);
+      assert.strictEqual(errors.length, invalid_arry[1]);
+    });
+  });
+});
+
+describe('username validation is failed at register: ', function() {
   username_invalid.forEach(function(invalid_arry) {
     it('username is ' + invalid_arry[0], function() {
       var params = {
@@ -85,13 +111,26 @@ describe('username validation is failed: ', function() {
         password: 'aaaaaa',
         confirm_password: 'aaaaaa'
       };
-      var errors = validater.validation(params);
+      var errors = validater.registerValidation(params);
       assert.strictEqual(errors.length, invalid_arry[1]);
     });
   });
 });
 
-describe('password validation if succeeded', function() {
+describe('password validation is succeeded at login:', function() {
+  password_valid.forEach(function(password) {
+  it('password is ' + password, function() {
+      var params = {
+        username: 'aaaaaa',
+        password: password
+      };
+      var errors = validater.loginValidation(params);
+      assert.strictEqual(errors.length, 0);
+    });
+  });
+});
+
+describe('password validation is succeeded at register:', function() {
   password_valid.forEach(function(password) {
   it('password is ' + password, function() {
       var params = {
@@ -99,13 +138,26 @@ describe('password validation if succeeded', function() {
         password: password,
         confirm_password: password
       };
-      var errors = validater.validation(params);
+      var errors = validater.registerValidation(params);
       assert.strictEqual(errors.length, 0);
     });
   });
 });
 
-describe('password validation if failed', function() {
+describe('password validation is failed at login', function() {
+  password_invalid.forEach(function(invalid_arry) {
+    it('password is ' + invalid_arry[0], function() {
+      var params = {
+        username: 'aaaaaa',
+        password: invalid_arry[0]
+      };
+      var errors = validater.loginValidation(params);
+      assert.strictEqual(errors.length, invalid_arry[1]);
+    });
+  });
+});
+
+describe('password validation is failed at register', function() {
   password_invalid.forEach(function(invalid_arry) {
     it('password is ' + invalid_arry[0], function() {
       var params = {
@@ -113,13 +165,13 @@ describe('password validation if failed', function() {
         password: invalid_arry[0],
         confirm_password: invalid_arry[0]
       };
-      var errors = validater.validation(params);
+      var errors = validater.registerValidation(params);
       assert.strictEqual(errors.length, invalid_arry[1]);
     });
   });
 });
 
-describe('passwrod confirmation failed: ', function() {
+describe('passwrod confirmation failed at register: ', function() {
   password_confirm_failed.forEach(function(invalid_arry) {
     it('password is ' + invalid_arry[0] + ' and confirm password is ' + invalid_arry[1], function() {
       var params = {
@@ -127,7 +179,7 @@ describe('passwrod confirmation failed: ', function() {
         password: invalid_arry[0],
         confirm_password: invalid_arry[1]
       };
-      var errors = validater.validation(params);
+      var errors = validater.registerValidation(params);
       assert.strictEqual(errors.length, invalid_arry[2]);
     });
   });
