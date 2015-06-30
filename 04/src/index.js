@@ -10,7 +10,7 @@ app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 app.use(session( {
-  secret: 'hogehoge'
+  secret: config.session.salt
 }));
 app.use('/public', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
