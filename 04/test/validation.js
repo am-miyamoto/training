@@ -54,36 +54,81 @@ var password_invalid = [
   , [ '||CDEFGHI', 2 ]
 ];
 
-describe('validation username', function() {
-  it('username is valid', function() {
-    username_valid.forEach(function(username) {
-      console.log(username);
-      var errors = validater.validation({ username: username, password: 'aaaaaa' });
+var password_confirm_failed = [
+    [ 'aaaaaa', 'bbbbbb', 1 ]
+  , [ 'aaaaaa', 'aaaaab', 1 ]
+  , [ '|aaaaa', 'aaaaaa', 2 ]
+  , [ 'aBcDeFgH', 'aBcDeFgG', 1 ]
+  , [ '-+!@#*&^', '-+!@#*&-', 1 ]
+  , [ '%~aA#*&^', '%~aA#*&-', 1 ]
+];
+
+describe('username validation is succeeded: ', function() {
+  username_valid.forEach(function(username) {
+    it('username is ' + username, function() {
+      var params = {
+        username: username,
+        password: 'aaaaaa',
+        confirm_password: 'aaaaaa'
+      };
+      var errors = validater.validation(params);
       assert.strictEqual(errors.length, 0);
     });
   });
-  it('username is invalid', function() {
-    username_invalid.forEach(function(invalid_arry) {
-      console.log(invalid_arry);
-      var errors = validater.validation({ username: invalid_arry[0], password: 'aaaaaa' });
+});
+
+describe('username validation is failed: ', function() {
+  username_invalid.forEach(function(invalid_arry) {
+    it('username is ' + invalid_arry[0], function() {
+      var params = {
+        username: invalid_arry[0],
+        password: 'aaaaaa',
+        confirm_password: 'aaaaaa'
+      };
+      var errors = validater.validation(params);
       assert.strictEqual(errors.length, invalid_arry[1]);
     });
   });
 });
 
-describe('validation password', function() {
-  it('password is valid', function() {
-    password_valid.forEach(function(password) {
-      console.log(password);
-      var errors = validater.validation({ username: 'aaaaaaa', password: password });
+describe('password validation if succeeded', function() {
+  password_valid.forEach(function(password) {
+  it('password is ' + password, function() {
+      var params = {
+        username: 'aaaaaa',
+        password: password,
+        confirm_password: password
+      };
+      var errors = validater.validation(params);
       assert.strictEqual(errors.length, 0);
     });
   });
-  it('password is invalid', function() {
-    password_invalid.forEach(function(invalid_arry) {
-      console.log(invalid_arry);
-      var errors = validater.validation({ username: 'aaaaaaa', password: invalid_arry[0] });
+});
+
+describe('password validation if failed', function() {
+  password_invalid.forEach(function(invalid_arry) {
+    it('password is ' + invalid_arry[0], function() {
+      var params = {
+        username: 'aaaaaa',
+        password: invalid_arry[0],
+        confirm_password: invalid_arry[0]
+      };
+      var errors = validater.validation(params);
       assert.strictEqual(errors.length, invalid_arry[1]);
+    });
+  });
+});
+
+describe('passwrod confirmation failed: ', function() {
+  password_confirm_failed.forEach(function(invalid_arry) {
+    it('password is ' + invalid_arry[0] + ' and confirm password is ' + invalid_arry[1], function() {
+      var params = {
+        username: 'aaaaaa',
+        password: invalid_arry[0],
+        confirm_password: invalid_arry[1]
+      };
+      var errors = validater.validation(params);
+      assert.strictEqual(errors.length, invalid_arry[2]);
     });
   });
 });

@@ -9,6 +9,13 @@ function validation(params) {
   var errors = [];
   errors = errors.concat(usernameValidater(params.username));
   errors = errors.concat(passwordValidater(params.password));
+  if (params.confirm_password) {
+    if (!passwordEqualityChecker(params.password, params.confirm_password)) {
+      errors.push(error_messages.password_equality_failed);
+    }
+  } else {
+    errors.push(error_messages.confirm_password_empty);
+  }
   return errors;
 }
 
@@ -52,13 +59,22 @@ function passwordValidater(password) {
   return errors;
 }
 
+function passwordEqualityChecker(password, confirm_password) {
+  if (password === confirm_password) {
+    return true;
+  }
+  return false;
+}
+
 var error_messages = {
   username_empty: 'usernameを入力して下さい',
   username_irregal_chara: 'usernameに使える文字は英大小文字と-(ハイフン)です',
   username_irregal_length: 'usernameは4から8文字です',
   password_empty: 'Passwordを入力して下さい',
   password_irregal_chara: 'Passwordに使える文字は英大小文字と-,+,!,@,#,*,&,^,%,~です',
-  password_irregal_length: 'Passwordは6から8文字です'
+  password_irregal_length: 'Passwordは6から8文字です',
+  confirm_password_empty: '確認用Passwordを入力して下さい',
+  password_equality_failed: '同じPasswordを入力して下さい'
 };
 
 if(typeof module === 'object') {
