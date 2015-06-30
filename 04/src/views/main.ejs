@@ -7,7 +7,7 @@
   <p>hello, <strong><%= myname %></strong></p>
   <ul id="userlist">
     <% usernames.forEach(function(username) { %>
-      <li><%= username %></li>
+      <li><a href="/users"><%= username %></a></li>
     <% }); %>
   </ul>
   <a href="/logout">LOGOUT</a>
