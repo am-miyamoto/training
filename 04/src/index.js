@@ -17,5 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/login', require('./routes/login'));
 app.use('/register', require('./routes/register'));
 app.use('/main', require('./routes/main'));
+app.use('/logout', require('./routes/logout'));
 
 module.exports.app = app;
