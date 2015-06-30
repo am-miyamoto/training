@@ -7,7 +7,12 @@
   <p>hello, <strong><%= myname %></strong></p>
   <ul id="userlist">
     <% usernames.forEach(function(username) { %>
-      <li><a href="/users"><%= username %></a></li>
+      <li>
+        <form method="post" action="/users">
+          <input type="hidden" name="other_name" value="<%= username %>">
+          <input type="submit" value="<%= username %>">
+        </form>
+      </li>
     <% }); %>
   </ul>
   <a href="/logout">LOGOUT</a>
