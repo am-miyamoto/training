@@ -4,18 +4,16 @@ window.addEventListener('load', function() {
   var $errors = document.getElementById('errors');
 
   $login.addEventListener('submit', function(e) {
+    while($errors.firstChild) {
+      $errors.removeChild($errors.firstChild);
+    }
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
     var params = {
       username: username,
       password: password
     };
-
-    while($errors.firstChild) {
-      $errors.removeChild($errors.firstChild);
-    }
-
-    var error_messages = validation(params);
+    var error_messages = loginValidation(params);
     if(error_messages.length > 0) {
       e.preventDefault();
       for(var i = 0; i < error_messages.length; i++) {

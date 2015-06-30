@@ -16,8 +16,7 @@ router.post('/', function(req, res) {
     username: username,
     password: password
   };
-
-  var errors = validater.validation(params);
+  var errors = validater.loginValidation(params);
   if(errors.length > 0) {
     return res.status(400).render('login', { error_reasons: errors });
   }

@@ -5,17 +5,19 @@
  * 正しい場合：空の配列
  * 正しくない場合：メッセージを入れた配列を返す
  */
-function validation(params) {
+
+function loginValidation(params) {
   var errors = [];
   errors = errors.concat(usernameValidater(params.username));
   errors = errors.concat(passwordValidater(params.password));
-  if (params.confirm_password) {
-    if (!passwordEqualityChecker(params.password, params.confirm_password)) {
-      errors.push(error_messages.password_equality_failed);
-    }
-  } else {
-    errors.push(error_messages.confirm_password_empty);
-  }
+  return errors;
+}
+
+function registerValidation(params) {
+  var errors = [];
+  errors = errors.concat(usernameValidater(params.username));
+  errors = errors.concat(passwordValidater(params.password));
+  errors = errors.concat(passwordEqualityChecker(params.password, params.confirm_password));
   return errors;
 }
 
@@ -60,10 +62,11 @@ function passwordValidater(password) {
 }
 
 function passwordEqualityChecker(password, confirm_password) {
-  if (password === confirm_password) {
-    return true;
+  var errors = [];
+  if (password !== confirm_password) {
+    errors.push(error_messages.password_equality_failed);
   }
-  return false;
+  return errors;
 }
 
 var error_messages = {
@@ -73,10 +76,10 @@ var error_messages = {
   password_empty: 'Passwordを入力して下さい',
   password_irregal_chara: 'Passwordに使える文字は英大小文字と-,+,!,@,#,*,&,^,%,~です',
   password_irregal_length: 'Passwordは6から8文字です',
-  confirm_password_empty: '確認用Passwordを入力して下さい',
-  password_equality_failed: '同じPasswordを入力して下さい'
+  password_equality_failed: '確認用Passwordが異なります'
 };
 
 if(typeof module === 'object') {
-  module.exports.validation = validation;
+  module.exports.loginValidation = loginValidation;
+  module.exports.registerValidation = registerValidation;
 }

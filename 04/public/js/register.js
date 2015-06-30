@@ -4,6 +4,9 @@ window.addEventListener('load', function() {
   var $errors = document.getElementById('errors');
 
   $register.addEventListener('submit', function(e) {
+    while($errors.firstChild) {
+      $errors.removeChild($errors.firstChild);
+    }
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
     var confirm_password = document.getElementById('confirm_password').value;
@@ -12,12 +15,7 @@ window.addEventListener('load', function() {
       password: password,
       confirm_password: confirm_password
     };
-
-    while($errors.firstChild) {
-      $errors.removeChild($errors.firstChild);
-    }
-
-    var error_messages = validation(params);
+    var error_messages = registerValidation(params);
     if(error_messages.length > 0) {
       e.preventDefault();
       for(var i = 0; i < error_messages.length; i++) {

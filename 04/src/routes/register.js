@@ -13,14 +13,12 @@ router.post('/', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
   var confirm_password = req.body.confirm_password;
-
   var params = {
     username: username,
     password: password,
     confirm_password: confirm_password
   };
-
-  var errors = validater.validation(params);
+  var errors = validater.registerValidation(params);
   if(errors.length > 0) {
     return res.status(400).render('register', { error_reasons: errors });
   }
@@ -36,8 +34,6 @@ router.post('/', function(req, res) {
     err_arry.push(err);
     console.log(err);
     return res.status(400).render('register', { error_reasons: err_arry });
-    // return res.status(500).send('server error');
-    // return res.status(500).send('server error');
   });
 });
 
