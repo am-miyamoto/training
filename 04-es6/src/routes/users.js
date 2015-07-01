@@ -3,7 +3,7 @@ let express = require('express')
   ;
 let router = express.Router();
 
-router.get('/:name', function(req, res) {
+router.get('/:name', (req, res) => {
   if (!req.session || !req.session.username) {
     return res.redirect('/login');
   }

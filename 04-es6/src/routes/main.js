@@ -4,16 +4,16 @@ let express = require('express')
   ;
 let router = express.Router();
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   let username = req.session.username;
   if (!username) {
     return res.redirect('/login');
   };
   let db = new Users();
   return db.connect()
-  .then(function() {
+  .then(() => {
     return db.getUsernames()
-  }).then(function(usernames) {
+  }).then((usernames) => {
     return res.render('main', { username, usernames });
   });
 });

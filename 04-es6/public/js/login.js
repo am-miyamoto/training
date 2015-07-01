@@ -1,9 +1,9 @@
 'use strict';
-window.addEventListener('load', function() {
+window.addEventListener('load', ()  => {
   let $login = document.getElementById('loginForm');
   let $errors = document.getElementById('errors');
 
-  $login.addEventListener('submit', function(e) {
+  $login.addEventListener('submit', (e) => {
     while($errors.firstChild) {
       $errors.removeChild($errors.firstChild);
     }

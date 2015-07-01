@@ -5,11 +5,11 @@ let express = require('express')
   ;
 let router = express.Router();
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   return res.render('register', { errors: '' });
 });
 
-router.post('/', function(req, res) {
+router.post('/', (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
   let confirm_password = req.body.confirm_password;
@@ -19,12 +19,12 @@ router.post('/', function(req, res) {
   }
   let db = new Users();
   db.connect()
-  .then(function(result) {
+  .then((result) => {
     return db.register(username, password);
-  }).then(function(user) {
+  }).then((user) => {
     req.session.username = username;
     return res.redirect('/main');
-  }).catch(function(err) {
+  }).catch((err) => {
     let errors = [];
     errors.push(err);
     return res.status(400).render('register', { errors });
