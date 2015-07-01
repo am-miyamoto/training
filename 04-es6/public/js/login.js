@@ -9,11 +9,7 @@ window.addEventListener('load', ()  => {
     }
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
-    let params = {
-      username: username,
-      password: password
-    };
-    let error_messages = loginValidation(params);
+    let error_messages = loginValidation({ username, password });
     if(error_messages.length > 0) {
       e.preventDefault();
       for(let i = 0; i < error_messages.length; i++) {

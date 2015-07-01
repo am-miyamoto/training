@@ -10,12 +10,7 @@ window.addEventListener('load', () => {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
     let confirm_password = document.getElementById('confirm_password').value;
-    let params = {
-      username: username,
-      password: password,
-      confirm_password: confirm_password
-    };
-    let error_messages = registerValidation(params);
+    let error_messages = registerValidation({ username, password, confirm_password });
     if(error_messages.length > 0) {
       e.preventDefault();
       for(let i = 0; i < error_messages.length; i++) {

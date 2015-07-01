@@ -1,15 +1,6 @@
 if(typeof module === 'object') {
   let err_definition = require('./err_definition');
-//  let err_definition = require('./err_definiton'); // err_messages, err_dictionaly
 }
-
-/**
- * params.username と Password を受け取り
- * 正しいフォーマットかチェックする。
- *
- * 正しい場合：空の配列
- * 正しくない場合：メッセージを入れた配列を返す
- */
 
 function loginValidation(params) {
   let errors = [];
