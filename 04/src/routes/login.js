@@ -6,7 +6,7 @@ var express = require('express')
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  return res.render('login', { error_reasons: '' });
+  return res.render('login', { error_reasons: null });
 });
 
 router.post('/', function(req, res) {
@@ -28,7 +28,7 @@ router.post('/', function(req, res) {
     if (result !== true) {
       return res.status(401).render('login', { error_reasons: ['ログイン情報が間違っています'] });
     }
-    req.session.name = username;
+    req.session.username = username;
     return res.redirect('/main');
   }).catch(function(err) {
     console.log(err);

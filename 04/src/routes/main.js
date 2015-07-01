@@ -5,16 +5,16 @@ var express = require('express')
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  var myname = req.session.name;
-  if (!myname) {
+  var username = req.session.username;
+  if (!username) {
     return res.redirect('/login');
   };
   var db = new Users();
   return db.connect()
   .then(function() {
     return db.getUsernames()
-  }).then(function(usernames) {
-    return res.render('main', { myname: myname,  usernames: usernames });
+  }).then(function(usernames) { // getUserNames
+    return res.render('main', { username: username,  usernames: usernames });
   });
 });
 

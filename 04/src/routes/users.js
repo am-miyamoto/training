@@ -4,12 +4,12 @@ var express = require('express')
 var router = express.Router();
 
 router.post('/', function(req, res) {
-  var myname = req.session.name;
-  if (!myname) {
+  if (!req.session || !req.session.username) {
     return res.redirect('/login');
-  };
-  var other_name = req.body.other_name;
-  return res.render('users', { myname: myname,  other_name: other_name });
+  }
+  var username = req.session.username;
+  var name = req.body.name;
+  return res.render('users', { username: username,  name: name });
 });
 
 module.exports = router;

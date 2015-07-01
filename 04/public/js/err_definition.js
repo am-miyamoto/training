@@ -1,4 +1,4 @@
-var err_define = {
+var err_definition = {
   username_empty: 'usernameを入力して下さい',
   username_irregal_chara: 'usernameに使える文字は英大小文字と-(ハイフン)です',
   username_irregal_length: 'usernameは4から8文字です',
@@ -9,5 +9,5 @@ var err_define = {
 };
 
 if(typeof module === 'object') {
-  module.exports.err_define = err_define;
+  module.exports.err_definition = err_definition;
 }

@@ -4,8 +4,10 @@
   "description": "you can register users and login.",
   "main": "index.js",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/_mocha ./test/*.js",
-    "start": "node index.js"
+    "test": "npm run lint && npm run mocha",
+    "start": "node index.js",
+    "lint": "node ./node_modules/eslint/bin/eslint.js ./src/index.js",
+    "mocha": "node ./node_modules/mocha/bin/_mocha ./test/*.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,11 @@
     "sequelize": "^3.3.2"
   },
   "devDependencies": {
+    "eslint": "^0.24.0",
+    "eslint-plugin-arrow-function": "^0.1.0",
+    "eslint-plugin-classes": "0.0.2",
+    "eslint-plugin-no-func-space": "0.0.4",
+    "eslint-plugin-nodeca": "^1.0.3",
     "mocha": "^2.2.5"
   }
 }

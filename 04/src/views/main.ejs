@@ -1,19 +1,24 @@
+<!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
   <title>main</title>
 </head>
 <body>
   <h1>main</h1>
-  <p>hello, <strong><%= myname %></strong></p>
-  <ul id="userlist">
-    <% usernames.forEach(function(username) { %>
+  <p>hello, <strong><%= username %></strong></p>
+  <% if(username) { %>
+    <ul id="userlist">
+      <% usernames.forEach(function(username) { %>
       <li>
         <form method="post" action="/users">
-          <input type="hidden" name="other_name" value="<%= username %>">
+          <input type="hidden" name="name" value="<%= username %>">
           <input type="submit" value="<%= username %>">
         </form>
       </li>
-    <% }); %>
-  </ul>
+      <% }); %>
+    </ul>
+  <% } %>
   <a href="/logout">LOGOUT</a>
-  </body>
+</body>
+</html>

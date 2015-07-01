@@ -1,5 +1,6 @@
 if(typeof module === 'object') {
-  var err_define = require('./err_define');
+  var err_definition = require('./err_definition');
+//  var err_definition = require('./err_definiton'); // err_messages, err_dictionaly
 }
 
 /**
@@ -21,6 +22,7 @@ function registerValidation(params) {
   var errors = [];
   errors = errors.concat(usernameValidater(params.username));
   errors = errors.concat(passwordValidater(params.password));
+  // passwordConfirmation()
   errors = errors.concat(passwordEqualityChecker(params.password, params.confirm_password));
   return errors;
 }
@@ -33,13 +35,13 @@ function usernameValidater(username) {
     char_rule: new RegExp('[^(a-zA-Z\-_)]')
   };
   if (!username) {
-    errors.push(err_define.username_empty);
+    errors.push(err_definition.username_empty);
   } else {
     if (username.length < username_rule.min_length || username.length > username_rule.max_length) {
-      errors.push(err_define.username_irregal_length);
+      errors.push(err_definition.username_irregal_length);
     }
     if (username.match(username_rule.char_rule)) {
-      errors.push(err_define.username_irregal_chara);
+      errors.push(err_definition.username_irregal_chara);
     }
   }
   return errors;
@@ -53,13 +55,13 @@ function passwordValidater(password) {
   };
   var errors = [];
   if (!password) {
-    errors.push(err_define.password_empty);
+    errors.push(err_definition.password_empty);
   } else {
     if (password.length < password_rule.min_length || password.length > password_rule.max_length) {
-      errors.push(err_define.password_irregal_length);
+      errors.push(err_definition.password_irregal_length);
     }
     if (password.match(password_rule.char_rule)) {
-      errors.push(err_define.password_irregal_chara);
+      errors.push(err_definition.password_irregal_chara);
     }
   }
   return errors;
@@ -68,7 +70,7 @@ function passwordValidater(password) {
 function passwordEqualityChecker(password, confirm_password) {
   var errors = [];
   if (password !== confirm_password) {
-    errors.push(err_define.password_equality_failed);
+    errors.push(err_definition.password_equality_failed);
   }
   return errors;
 }

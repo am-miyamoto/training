@@ -27,10 +27,10 @@ router.post('/', function(req, res) {
   .then(function(result) {
     return db.register(username, password);
   }).then(function(user) {
-    req.session.name = username;
+    req.session.username = username;
     return res.redirect('/main');
   }).catch(function(err) {
-    var err_arry = [];
+    var err_arry = []; // errors = [], error_reasons = []
     err_arry.push(err);
     console.log(err);
     return res.status(400).render('register', { error_reasons: err_arry });
