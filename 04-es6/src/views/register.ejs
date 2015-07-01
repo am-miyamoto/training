@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>register</title>
+  <script type="text/javascript" src="public/js/err_definition.js"></script>
+  <script type="text/javascript" src="public/js/validation.js"></script>
+  <script type="text/javascript" src="public/js/register.js"></script>
+</head>
+<body>
+  <h1>Registration Form</h1>
+  <form id="registerForm" method="post" action="/register">
+    <ul id="errors">
+      <% if(error_reasons) { %>
+        <% error_reasons.forEach(function(error) { %>
+          <li>
+          <%= error %>
+          </li>
+        <% }); %>
+      <% } %>
+    </ul>
+    <label for="username">Username:</labal>
+    <input type="text" id="username" name="username" maxlength="8" required ></br>
+    <label for="password">Choose Password:</label>
+    <input type="password" id="password" name="password" maxlength="8" required ></br>
+    <label for="confirm_password">Confirm Password:</label>
+    <input type="password" id="confirm_password" name="confirm_password" maxlength="8" required ></br>
+    <input type="submit" value="REGISTER" ></br>
+  </form>
+  <a href="/login">ログインページへ</a>
+</body>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>lgoin</title>
+  <script type="text/javascript" src="public/js/err_definition.js"></script>
+  <script type="text/javascript" src="public/js/validation.js"></script>
+  <script type="text/javascript" src="public/js/login.js"></script>
+</head>
+<body>
+  <h1>Login Form</h1>
+  <form id="loginForm" method="post" action="/login">
+    <ul id="errors">
+      <% if(error_reasons) { %>
+        <% error_reasons.forEach(function(error) { %>
+          <li>
+          <%= error %>
+          </li>
+        <% }); %>
+      <% } %>
+    </ul>
+    <label for="username">USERNAME:</labal>
+    <input type="text" id="username" name="username" maxlength="8" required ></br>
+    <label for="password">PASSWORD:</label>
+    <input type="password" id="password" name="password" maxlength="24" required ></br>
+    <input type="submit" value="LOGIN" ></br>
+  </form>
+  <a href="/register">登録ページへ</a>
+</body>

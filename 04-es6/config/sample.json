@@ -1,0 +1,12 @@
+{
+  "database": {
+    "host": "localhost",
+    "dbname": "name",
+    "username": "user",
+    "password": "pass",
+    "logging": "false"
+  },
+  "session": {
+    "salt": "sample"
+  }
+}
