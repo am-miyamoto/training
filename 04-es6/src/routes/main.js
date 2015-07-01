@@ -5,10 +5,10 @@ let express = require('express')
 let router = express.Router();
 
 router.get('/', (req, res) => {
-  let username = req.session.username;
-  if (!username) {
+  if (!req.session || !req.session.username) {
     return res.redirect('/login');
   };
+  let username = req.session.username;
   let db = new Users();
   return db.connect()
   .then(() => {

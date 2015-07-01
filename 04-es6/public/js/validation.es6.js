@@ -1,5 +1,5 @@
 if(typeof module === 'object') {
-  let err_definition = require('./err_definition');
+  var err_definition = require('./err_definition');
 }
 
 function loginValidation(params) {

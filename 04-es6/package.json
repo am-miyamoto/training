@@ -7,7 +7,7 @@
     "test": "npm run lint && npm run mocha",
     "start": "babel-node index.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js ./src/index.js",
-    "mocha": "node ./node_modules/mocha/bin/_mocha ./test/*.js",
+    "mocha": "babel-node ./node_modules/mocha/bin/_mocha ./test/*.js",
     "build-es6": "babel ./public/js/err_definition.es6.js -o ./public/js/err_definition.js && babel ./public/js/login.es6.js -o ./public/js/login.js  && babel ./public/js/register.es6.js -o ./public/js/register.js && babel ./public/js/validation.es6.js -o ./public/js/validation.js"
   },
   "repository": {

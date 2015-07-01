@@ -24,7 +24,7 @@ class Database {
         username: username
       }
     })
-    .then(function(user) {
+    .then((user) => {
       if (!user) {
         return false;
       }
@@ -36,13 +36,9 @@ class Database {
   }
 
   register(username, password) {
-    let params = {
-      username: username,
-      password: password
-    };
-    let user = this.Users.build(params);
+    let user = this.Users.build({ username, password });
     return user.save()
-    .catch(function(err) {
+    .catch((err) => {
       return Promise.reject('そのユーザー名は既に登録されています');
     });
   }
@@ -51,8 +47,8 @@ class Database {
     return this.Users.findAll( {
       order: [['username', 'ASC']]
     })
-    .then(function(users) {
-      let usernames = users.map(function(user) {
+    .then((users) => {
+      let usernames = users.map((user) => {
         return user.username;
       });
       return usernames;
