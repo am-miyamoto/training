@@ -1,9 +1,9 @@
 let express = require('express')
-, bodyParser = require('body-parser')
-, validater = require('../public/js/validation')
-, config = require('config')
-, session = require('express-session')
-;
+  , bodyParser = require('body-parser')
+  , validater = require('../public/js/validation')
+  , config = require('config')
+  , session = require('express-session')
+  ;
 
 let app = express();
 app.set('views', './src/views');

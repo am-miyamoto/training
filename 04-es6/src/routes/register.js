@@ -6,21 +6,16 @@ let express = require('express')
 let router = express.Router();
 
 router.get('/', function(req, res) {
-  return res.render('register', { error_reasons: '' });
+  return res.render('register', { errors: '' });
 });
 
 router.post('/', function(req, res) {
   let username = req.body.username;
   let password = req.body.password;
   let confirm_password = req.body.confirm_password;
-  let params = {
-    username: username,
-    password: password,
-    confirm_password: confirm_password
-  };
-  let errors = validater.registerValidation(params);
+  let errors = validater.registerValidation({ username, password, confirm_password });
   if(errors.length > 0) {
-    return res.status(400).render('register', { error_reasons: errors });
+    return res.status(400).render('register', { errors: errors });
   }
   let db = new Users();
   db.connect()
@@ -30,10 +25,9 @@ router.post('/', function(req, res) {
     req.session.username = username;
     return res.redirect('/main');
   }).catch(function(err) {
-    let err_arry = []; // errors = [], error_reasons = []
-    err_arry.push(err);
-    console.log(err);
-    return res.status(400).render('register', { error_reasons: err_arry });
+    let errors = [];
+    errors.push(err);
+    return res.status(400).render('register', { errors });
   });
 });
 

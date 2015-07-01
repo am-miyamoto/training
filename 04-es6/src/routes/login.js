@@ -6,19 +6,15 @@ let express = require('express')
 let router = express.Router();
 
 router.get('/', function(req, res) {
-  return res.render('login', { error_reasons: null });
+  return res.render('login', { errors: null });
 });
 
 router.post('/', function(req, res) {
   let username = req.body.username;
   let password = req.body.password;
-  let params = {
-    username: username,
-    password: password
-  };
-  let errors = validater.loginValidation(params);
+  let errors = validater.loginValidation({ username, password });
   if(errors.length > 0) {
-    return res.status(400).render('login', { error_reasons: errors });
+    return res.status(400).render('login', { errors });
   }
   let db = new Users();
   db.connect()
@@ -26,7 +22,7 @@ router.post('/', function(req, res) {
     return db.login(username, password);
   }).then(function(result) {
     if (result !== true) {
-      return res.status(401).render('login', { error_reasons: ['ログイン情報が間違っています'] });
+      return res.status(401).render('login', { errors: ['ログイン情報が間違っています'] });
     }
     req.session.username = username;
     return res.redirect('/main');

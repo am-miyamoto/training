@@ -10,8 +10,8 @@
   <h1>Registration Form</h1>
   <form id="registerForm" method="post" action="/register">
     <ul id="errors">
-      <% if(error_reasons) { %>
-        <% error_reasons.forEach(function(error) { %>
+      <% if(errors) { %>
+        <% errors.forEach(function(error) { %>
           <li>
           <%= error %>
           </li>

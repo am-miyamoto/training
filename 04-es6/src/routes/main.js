@@ -13,8 +13,8 @@ router.get('/', function(req, res) {
   return db.connect()
   .then(function() {
     return db.getUsernames()
-  }).then(function(usernames) { // getUserNames
-    return res.render('main', { username: username,  usernames: usernames });
+  }).then(function(usernames) {
+    return res.render('main', { username, usernames });
   });
 });
 

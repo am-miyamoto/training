@@ -9,7 +9,7 @@ router.get('/:name', function(req, res) {
   }
   let username = req.session.username;
   let name = req.params.name;
-  return res.render('users', { username: username,  name: name });
+  return res.render('users', { username, name });
 });
 
 module.exports = router;
