@@ -1,0 +1,44 @@
+{
+  "name": "test-apps",
+  "version": "0.0.1",
+  "description": "you can register users and login.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint && npm run mocha",
+    "start": "node index.js",
+    "lint": "node ./node_modules/eslint/bin/eslint.js ./src/index.js",
+    "mocha": "node ./node_modules/mocha/bin/_mocha ./test/*.js",
+    "build": "babel index.es.js -o index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/am-miyamoto/training.git"
+  },
+  "keywords": [
+    "login",
+    "register"
+  ],
+  "author": "miyamoto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/am-miyamoto/training/issues"
+  },
+  "homepage": "https://github.com/am-miyamoto/training#readme",
+  "dependencies": {
+    "body-parser": "^1.13.1",
+    "config": "^1.14.0",
+    "ejs": "^2.3.1",
+    "express": "^4.13.0",
+    "express-session": "^1.11.3",
+    "mysql": "^2.7.0",
+    "sequelize": "^3.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^0.24.0",
+    "eslint-plugin-arrow-function": "^0.1.0",
+    "eslint-plugin-classes": "0.0.2",
+    "eslint-plugin-no-func-space": "0.0.4",
+    "eslint-plugin-nodeca": "^1.0.3",
+    "mocha": "^2.2.5"
+  }
+}
