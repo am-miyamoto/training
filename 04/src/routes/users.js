@@ -3,12 +3,12 @@ var express = require('express')
   ;
 var router = express.Router();
 
-router.post('/', function(req, res) {
+router.get('/:name', function(req, res) {
   if (!req.session || !req.session.username) {
     return res.redirect('/login');
   }
   var username = req.session.username;
-  var name = req.body.name;
+  var name = req.params.name;
   return res.render('users', { username: username,  name: name });
 });
 

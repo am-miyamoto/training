@@ -11,10 +11,7 @@
     <ul id="userlist">
       <% usernames.forEach(function(username) { %>
       <li>
-        <form method="post" action="/users">
-          <input type="hidden" name="name" value="<%= username %>">
-          <input type="submit" value="<%= username %>">
-        </form>
+        <a href="/users/<%= username %>"><%= username %></a>
       </li>
       <% }); %>
     </ul>
